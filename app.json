@@ -1,0 +1,31 @@
+{
+  "expo": {
+    "name": "MOVI",
+    "slug": "movi",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "scheme": "movi",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": false,
+    "platforms": ["android"],
+    "android": {
+      "package": "com.movi.customer",
+      "edgeToEdgeEnabled": true,
+      "adaptiveIcon": {
+        "backgroundColor": "#080A0F"
+      }
+    },
+    "plugins": ["expo-router", "@rnmapbox/maps"],
+    "web": {
+      "bundler": "metro"
+    },
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "apiBaseUrl": "http://localhost:4000",
+      "mapboxAccessToken": "",
+      "environment": "development"
+    }
+  }
+}
