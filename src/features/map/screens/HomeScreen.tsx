@@ -1,4 +1,5 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { router } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { View, StyleSheet, TouchableOpacity, TextInput, Image } from 'react-native';
@@ -11,7 +12,7 @@ import { RideOptionCard } from '@/features/booking/components/RideOptionCard';
 import { MatchingPanel } from '@/features/sharedRide/components/MatchingPanel';
 import { colors, radius, shadows, spacing } from '@/theme';
 
-// Mock route data for Bangalore (Koramangala to Indiranagar)
+// Mock route data — Greater Noida: Pari Chowk → Knowledge Park III
 const MOCK_ROUTE = {
   type: 'FeatureCollection',
   features: [
@@ -21,9 +22,9 @@ const MOCK_ROUTE = {
       geometry: {
         type: 'LineString',
         coordinates: [
-          [77.6208, 12.9345], // Koramangala
-          [77.6309, 12.9512],
-          [77.6389, 12.9719], // Indiranagar
+          [77.5040, 28.4747], // Pari Chowk, Greater Noida
+          [77.4920, 28.4812],
+          [77.4790, 28.4890], // Knowledge Park III
         ],
       },
     },
@@ -34,6 +35,10 @@ export function HomeScreen() {
   const insets = useSafeAreaInsets();
   const [step, setStep] = useState<'search' | 'selection' | 'matching'>('search');
   const [selectedRide, setSelectedRide] = useState<'shared' | 'private'>('shared');
+
+  const handleOpenSearch = () => {
+    router.push('/search');
+  };
 
   const handleSelectRoute = () => {
     setStep('selection');
@@ -57,7 +62,7 @@ export function HomeScreen() {
       <SafeMapView style={styles.map} styleURL="mapbox://styles/mapbox/dark-v11" logoEnabled={false} compassEnabled={false}>
         <SafeCamera
           zoomLevel={13}
-          centerCoordinate={[77.6309, 12.9512]}
+          centerCoordinate={[77.5040, 28.4747]}
           animationMode="flyTo"
           animationDuration={2000}
         />
@@ -137,7 +142,7 @@ export function HomeScreen() {
                 </TouchableOpacity>
               </View>
               
-              <TouchableOpacity style={styles.searchBar} onPress={handleSelectRoute}>
+              <TouchableOpacity style={styles.searchBar} onPress={handleOpenSearch} activeOpacity={0.8}>
                 <MaterialCommunityIcons name="magnify" size={24} color={colors.brand.primary} />
                 <Text variant="body" tone="secondary" style={styles.searchPlaceholder}>Search destination</Text>
                 <MaterialCommunityIcons name="microphone" size={24} color={colors.text.primary} />
@@ -176,11 +181,11 @@ export function HomeScreen() {
 
               <View style={styles.recentCards}>
                 {[
-                  { id: 1, name: 'Indiranagar Metro', detail: '4.2 km • 12 min', icon: 'train' },
-                  { id: 2, name: 'Koramangala, Bangalore', detail: '6.8 km • 18 min', icon: 'briefcase' },
-                  { id: 3, name: 'MG Road', detail: '7.3 km • 22 min', icon: 'star' },
+                  { id: 1, name: 'Pari Chowk Metro Station', detail: '2.1 km • 6 min', icon: 'train' },
+                  { id: 2, name: 'Sector 62, Noida', detail: '11 km • 22 min', icon: 'briefcase' },
+                  { id: 3, name: 'Botanical Garden Metro', detail: '14 km • 28 min', icon: 'star' },
                 ].map(place => (
-                  <TouchableOpacity key={place.id} style={styles.recentCard} onPress={handleSelectRoute}>
+                  <TouchableOpacity key={place.id} style={styles.recentCard} onPress={handleOpenSearch}>
                     <View style={styles.recentIcon}>
                       <MaterialCommunityIcons name={place.icon as any} size={20} color={colors.brand.primary} />
                     </View>

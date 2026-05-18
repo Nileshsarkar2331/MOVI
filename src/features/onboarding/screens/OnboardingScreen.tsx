@@ -172,17 +172,15 @@ export function OnboardingScreen() {
               title="Replay onboarding"
               onPress={handlePrimaryPress}
             />
-          ) : isLast ? (
-            // Last slide: single full-width 'Enter MOVI' primary CTA
-            <Button
-              fullWidth
-              size="lg"
-              title="Enter MOVI"
-              onPress={handlePrimaryPress}
-            />
           ) : (
-            // Mid slides: Skip (left ghost) + Continue (right ghost) side by side
+            // Onboarding slides: Continue / Enter MOVI (left ghost) + Skip (right ghost) side by side
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+              <Button
+                size="md"
+                title={isLast ? 'Enter MOVI' : 'Continue'}
+                variant="ghost"
+                onPress={handlePrimaryPress}
+              />
               <Button
                 size="md"
                 title="Skip"
@@ -191,12 +189,6 @@ export function OnboardingScreen() {
                   completeOnboarding();
                   router.replace('/home');
                 }}
-              />
-              <Button
-                size="md"
-                title="Continue"
-                variant="ghost"
-                onPress={handlePrimaryPress}
               />
             </View>
           )}
