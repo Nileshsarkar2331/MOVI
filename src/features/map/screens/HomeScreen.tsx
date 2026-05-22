@@ -11,6 +11,7 @@ import { BottomSheet } from '@/components/motion';
 import { RideOptionCard } from '@/features/booking/components/RideOptionCard';
 import { MatchingPanel } from '@/features/sharedRide/components/MatchingPanel';
 import { colors, radius, shadows, spacing } from '@/theme';
+import { LogoSvg } from '@/components/common/LogoSvg';
 
 // Mock route data — Greater Noida: Pari Chowk → Knowledge Park III
 const MOCK_ROUTE = {
@@ -57,7 +58,7 @@ export function HomeScreen() {
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
-      
+
       {/* Full-screen Map */}
       <SafeMapView style={styles.map} styleURL="mapbox://styles/mapbox/dark-v11" logoEnabled={false} compassEnabled={false}>
         <SafeCamera
@@ -84,18 +85,18 @@ export function HomeScreen() {
       {/* Floating Header */}
       <View style={[styles.header, { top: insets.top + spacing.sm }]}>
         <TouchableOpacity style={styles.iconButton}>
-          <MaterialCommunityIcons name="menu" size={24} color={colors.text.primary} />
+          <LogoSvg width={40} height={40} />
         </TouchableOpacity>
-        
+
         <View style={styles.headerRight}>
           <TouchableOpacity style={styles.iconButton}>
             <MaterialCommunityIcons name="bell-outline" size={24} color={colors.text.primary} />
             <View style={styles.notificationDot} />
           </TouchableOpacity>
           <TouchableOpacity style={styles.profileContainer}>
-            <Image 
-              source={{ uri: 'https://i.pravatar.cc/150?img=11' }} 
-              style={styles.profileImage} 
+            <Image
+              source={{ uri: 'https://i.pravatar.cc/150?img=11' }}
+              style={styles.profileImage}
             />
             <View style={styles.profileOnlineDot} />
           </TouchableOpacity>
@@ -141,7 +142,7 @@ export function HomeScreen() {
                   <Text variant="caption" tone="primary" style={{ marginLeft: 4 }}>Saved Places</Text>
                 </TouchableOpacity>
               </View>
-              
+
               <TouchableOpacity style={styles.searchBar} onPress={handleOpenSearch} activeOpacity={0.8}>
                 <MaterialCommunityIcons name="magnify" size={24} color={colors.brand.primary} />
                 <Text variant="body" tone="secondary" style={styles.searchPlaceholder}>Search destination</Text>
@@ -267,9 +268,9 @@ export function HomeScreen() {
             <MaterialCommunityIcons name="transit-connection-variant" size={24} color={colors.text.secondary} />
             <Text variant="micro" tone="secondary" style={{ marginTop: 4 }}>Routes</Text>
           </TouchableOpacity>
-          
+
           <View style={styles.navItemCentralPlaceholder} />
-          
+
           <TouchableOpacity style={styles.navItem}>
             <MaterialCommunityIcons name="ticket-confirmation-outline" size={24} color={colors.text.secondary} />
             <Text variant="micro" tone="secondary" style={{ marginTop: 4 }}>Tickets</Text>
